@@ -28,7 +28,7 @@ app.post("/question/updateStatus",setQuestionStatus)
 app.post("/question/getStatus",getQuestionStatus)
 // For any other routes, serve the React app
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+  res.status(200).json("Welcome to webpage")
 });
 
 const PORT = process.env.PORT || 5000;
