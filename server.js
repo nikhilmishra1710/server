@@ -27,7 +27,7 @@ app.post("/validateUserToken",validateUserToken)
 app.post("/question/updateStatus",setQuestionStatus)
 app.post("/question/getStatus",getQuestionStatus)
 // For any other routes, serve the React app
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.status(200).json("Welcome to webpage")
 });
 
