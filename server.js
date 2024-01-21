@@ -16,9 +16,9 @@ app.use(express.static(path.join(__dirname, '../client/build')));
 Connection();
 
 
-function delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
+// function delay(ms) {
+//     return new Promise(resolve => setTimeout(resolve, ms));
+//   }
 
 app.post("/login/validateUser",login)
 app.post("/login/newUser",signUp)
