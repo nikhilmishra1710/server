@@ -15,7 +15,7 @@ const signUp=async (req,res)=>{
         console.log(user)
         const newUser=new User(user)
         await newUser.save()
-        const token=jwt.sign(newUser.toJSON(),"sadfasdf1864fasdf46as8df78456dsf",{expiresIn:"24h"})
+        const token=jwt.sign(newUser.toJSON(),process.env.SECRET_KEY,{expiresIn:"24h"})
         console.log(token)
         res.status(200).json({"isSuccess":true,"msg":"Signup successful!","token":token,"isAdmin":user.isAdmin})
         
@@ -33,7 +33,7 @@ const login=async (req,res)=>{
         if(user){
             const match=bcrypt.compare(req.headers.password,user.password)
             if(match){
-                const token=jwt.sign(user.toJSON(),"sadfasdf1864fasdf46as8df78456dsf",{expiresIn:"24h"})
+                const token=jwt.sign(user.toJSON(),process.env.SECRET_KEY,{expiresIn:"24h"})
                 res.status(200).json({"isSuccess":true,"msg":"Login successful!","token":token,"isAdmin":user.isAdmin})
             }else{
                 res.status(400).json({"isSuccess":false,"msg":"Password is not correct"})
@@ -57,7 +57,7 @@ const validateUserToken=async(req,res)=>{
             return res.status(403).json({isSuccess:false, msg: 'No token provided.' });
         }
     
-        jwt.verify(token, 'sadfasdf1864fasdf46as8df78456dsf', (err, decoded) => { // Replace 'secret_key' with your actual secret key
+        jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => { // Replace 'secret_key' with your actual secret key
             if (err) {
                 return res.status(401).json({isSuccess:false, msg: 'Failed to authenticate token.' });
             }else{
